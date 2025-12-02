@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VOID - DEV</title>
+
+    <!-- Update favicon (void colors and branding) -->
+    <link rel="icon" href="/favicons/void.png">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XWMFDM1WRX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XWMFDM1WRX');
+    </script>
+
+    <!-- Brand and OG Tags for "void" -->
+    <meta property="og:title" content="Void">
+    <meta property="og:description" content="The Game Movie Pr_xy Void!">
+    <meta property="og:image" content="https://void-dev.github.io/image1.png">
+    <meta property="og:url" content="https://void-dev.github.io/">
+    <meta property="og:type" content="website">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap');
+
+        :root {
+            /* VOID Colors - feel free to further tune */
+            --glow-color: #8e00fd;                 /* Main accent - purple void */
+            --shadow-color: rgba(178, 0, 255, 0.7); /* Soft violet shadow */
+            --background: #070012;                  /* Deep void background */
+            --text-glow: 0 0 8px var(--shadow-color), 0 0 24px var(--shadow-color);
+            --border-glow: 0 0 18px var(--glow-color), 0 0 36px var(--glow-color);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background-color: var(--background);
+            color: #fafaff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(138, 0, 255, 0.22) 0%, transparent 32%),
+                radial-gradient(circle at 80% 80%, rgba(30, 0, 55, 0.33) 0%, transparent 32%),
+                linear-gradient(60deg, #070012 0%, #2c0054 130%);
+            z-index: -1;
+        }
+
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                linear-gradient(90deg, rgb(194, 119, 255, 0.09) 1px, transparent 1px),
+                linear-gradient(0deg, rgba(194, 119, 255, 0.11) 1px, transparent 1px);
+            background-size: 30px 30px;
+            z-index: -1;
+            opacity: 0.2;
+        }
+
+        .title-container {
+            margin-bottom: 4vh;
+            text-align: center;
+            position: relative;
+        }
+
+        .title {
+            font-size: 3rem;
+            font-weight: 900;
+            letter-spacing: 0.5rem;
+            text-shadow: var(--text-glow);
+            position: relative;
+        }
+
+        .title::after {
+            content: "";
+            position: absolute;
+            bottom: 15px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--glow-color);
+            box-shadow: var(--border-glow);
+        }
+
+        .nav-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            position: relative;
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 300px;
+            height: 60px;
+            background-color: rgba(27, 0, 51, 0.65);
+            color: #e3b6ff;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 30px;
+            border: 2px solid var(--glow-color);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--border-glow);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            text-shadow: 0 0 5px var(--shadow-color);
+        }
+
+        .nav-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 0 20px var(--glow-color), 0 0 40px var(--glow-color);
+            background-color: rgba(81, 0, 160, 0.5);
+        }
+
+        .nav-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(178, 0, 255, 0.23),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .nav-button:hover::before {
+            left: 100%;
+        }
+
+        .nav-button:active {
+            transform: translateY(2px) scale(0.98);
+        }
+
+        .github-icon {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 60px;
+            height: 60px;
+            transition: all 1s ease;
+            opacity: 1;
+            border-radius: 50px;
+            background-color: #17002a;
+        }
+
+        .github-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+            filter: none;
+            opacity: 1;
+        }
+
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: var(--glow-color);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--glow-color);
+            animation: particleFloat 15s infinite linear;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+                letter-spacing: 0.3rem;
+            }
+
+            .nav-button {
+                width: 250px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .title {
+                font-size: 2rem;
+                letter-spacing: 0.2rem;
+            }
+
+            .nav-button {
+                width: 100%;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .github-icon {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                left: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="grid-overlay"></div>
+    <div class="particles" id="particles"></div>
+
+    <div class="title-container">
+        <div class="title">VOID - DEV</div>
+    </div>
+
+    <div class="nav-container">
+        <a id="changelog-btn" class="nav-button" href="changelog.html">CHANGELOG</a>
+        <a id="homepage-btn" class="nav-button" href="homepage.html">Homepage</a>
+        <a id="games-btn" class="nav-button" href="games/index.html">GAMES</a>
+    </div>
+
+    <a href="https://github.com/void-dev/void-dev.github.io/" target="_blank">
+        <img src="githubicon.png" alt="GitHub" class="github-icon">
+    </a>
+
+    <script>
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 50;
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+
+            const posX = Math.random() * window.innerWidth;
+            const posY = Math.random() * window.innerHeight;
+
+            const size = Math.random() * 3 + 1;
+
+            const duration = Math.random() * 15 + 5;
+            const delay = Math.random() * 10;
+
+            particle.style.left = `${posX}px`;
+            particle.style.top = `${posY}px`;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.animationDuration = `${duration}s`;
+            particle.style.animationDelay = `${delay}s`;
+
+            particlesContainer.appendChild(particle);
+        }
+
+        // Use guards to avoid errors if elements are missing
+        const changelogBtn = document.getElementById('changelog-btn');
+        if (changelogBtn) {
+            // keep behavior consistent with original: open changelog in a new tab
+            changelogBtn.addEventListener('click', function(event) {
+                // Allow anchor default behavior (href), but if JS was desired:
+                // window.open('changelog.html', '_blank');
+                // preventDefault is not used here so href will work
+            });
+        }
+
+        // homepage now uses href attribute so no JS is required, but keep a safe handler if you prefer JS navigation:
+        const homepageBtn = document.getElementById('homepage-btn');
+        if (homepageBtn) {
+            homepageBtn.addEventListener('click', function() {
+                // navigate in the same tab to homepage.html
+                window.location.href = 'homepage.html';
+            });
+        }
+
+        const proxyBtn = document.getElementById('proxy-btn');
+        if (proxyBtn) {
+            proxyBtn.addEventListener('click', function() {
+                window.location.href = '/info.html';
+            });
+        }
+
+        const gamesBtn = document.getElementById('games-btn');
+        if (gamesBtn) {
+            gamesBtn.addEventListener('click', function() {
+                window.location.href = '/gms.html';
+            });
+        }
+    </script>
+</body>
+
+</html>
