@@ -1,26 +1,188 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>404 — Not Found</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <main class="center" role="main" aria-labelledby="title">
-    <div class="card" aria-hidden="false">
-      <h1 id="title" class="neon large">404</h1>
-      <p class="neon subtitle">Page Not Found</p>
+root{
+  --bg-1: #000;
+  --bg-2: #050505;
+  --neon-color: #ffffff; /* white neon */
+  --neon-glow: rgba(255,255,255,0.9);
+  --muted: #9a9a9a;
+  --card-bg: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  --radius: 14px;
+  --max-width: 920px;
+}
 
-      <p class="muted">The page you're looking for doesn't exist or has been moved.</p>
+*{box-sizing:border-box}
+html,body{
+  height:100%;
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+  background: radial-gradient(1200px 600px at 10% 20%, rgba(255,255,255,0.02), transparent),
+              linear-gradient(180deg,var(--bg-1),var(--bg-2));
+  color:var(--neon-color);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
 
-      <div class="actions">
-        <a class="btn neon-btn" href="/" title="Go to home">Go to Home</a>
-        <a class="text-link" href="mailto:webmaster@example.com?subject=404%20report" title="Report broken link">Report</a>
-      </div>
-    </div>
+.center{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:24px;
+  padding:48px 20px;
+  text-align:center;
+}
 
-    <footer class="footer muted small">If you think this is an error, contact the site administrator.</footer>
-  </main>
-</body>
-</html>
+/* card */
+.card{
+  width:100%;
+  max-width:var(--max-width);
+  padding:36px;
+  border-radius:var(--radius);
+  background:var(--card-bg);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+}
+
+/* Neon text styling */
+.neon{
+  color:var(--neon-color);
+  text-shadow:
+    0 0 4px rgba(255,255,255,0.9),
+    0 0 10px rgba(255,255,255,0.75),
+    0 0 28px rgba(255,255,255,0.45),
+    0 0 60px rgba(255,255,255,0.15);
+  letter-spacing:0.02em;
+  margin:0;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* Large 404 */
+.large{
+  font-size:clamp(64px, 14vw, 160px);
+  line-height:0.9;
+  font-weight:800;
+  margin-bottom:8px;
+  animation: neon-flicker 3s ease-in-out infinite;
+}
+
+/* subtitle */
+.subtitle{
+  font-size:clamp(18px, 3.2vw, 28px);
+  margin:0;
+  font-weight:600;
+  animation: neon-pulse 3s ease-in-out infinite;
+}
+
+/* muted paragraph */
+.muted{
+  color:var(--muted);
+  margin:18px 0 0 0;
+}
+
+/* footer */
+.footer{
+  color:var(--muted);
+  opacity:0.9;
+}
+
+/* actions */
+.actions{
+  margin-top:20px;
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+/* neon button */
+.btn{
+  display:inline-block;
+  padding:12px 20px;
+  border-radius:10px;
+  text-decoration:none;
+  font-weight:600;
+  color:var(--neon-color);
+  border:1px solid rgba(255,255,255,0.18);
+  background:transparent;
+  transition: transform .12s ease, box-shadow .12s ease;
+  box-shadow: 0 6px 28px rgba(0,0,0,0.6);
+  position:relative;
+  outline: none;
+}
+
+.btn:focus{
+  box-shadow: 0 0 0 6px rgba(255,255,255,0.06), 0 6px 28px rgba(0,0,0,0.6);
+  transform: translateY(-1px);
+}
+
+.neon-btn{
+  text-shadow:
+    0 0 6px rgba(255,255,255,0.95),
+    0 0 14px rgba(255,255,255,0.7),
+    0 0 30px rgba(255,255,255,0.35);
+  border-color: rgba(255,255,255,0.28);
+}
+
+.neon-btn:hover{
+  transform:translateY(-3px);
+  box-shadow:
+    0 10px 40px rgba(0,0,0,0.6),
+    0 0 40px rgba(255,255,255,0.08);
+}
+
+/* simple text link */
+.text-link{
+  color:var(--muted);
+  text-decoration:underline;
+  font-weight:600;
+}
+
+/* animations */
+@keyframes neon-pulse{
+  0%,100%{
+    text-shadow:
+      0 0 4px rgba(255,255,255,0.9),
+      0 0 10px rgba(255,255,255,0.75),
+      0 0 28px rgba(255,255,255,0.45),
+      0 0 60px rgba(255,255,255,0.15);
+    transform: translateY(0);
+  }
+  50%{
+    text-shadow:
+      0 0 8px rgba(255,255,255,1),
+      0 0 20px rgba(255,255,255,0.9),
+      0 0 40px rgba(255,255,255,0.55),
+      0 0 80px rgba(255,255,255,0.18);
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes neon-flicker{
+  0%, 18%, 22%, 25%, 53%, 57%, 100%{
+    opacity:1;
+    text-shadow:
+      0 0 4px rgba(255,255,255,0.9),
+      0 0 10px rgba(255,255,255,0.75),
+      0 0 28px rgba(255,255,255,0.45),
+      0 0 60px rgba(255,255,255,0.15);
+  }
+  20%, 24%, 55%{
+    opacity:0.85;
+    text-shadow:
+      0 0 3px rgba(255,255,255,0.7),
+      0 0 8px rgba(255,255,255,0.55);
+  }
+}
+
+/* small helpers */
+.small{font-size:12px}
+@media (max-width:520px){
+  .card{padding:22px}
+  .muted{font-size:14px}
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion:reduce){
+  .large, .subtitle { animation: none; }
+  .btn, .neon-btn { transition: none; }
+}
